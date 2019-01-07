@@ -17,7 +17,7 @@ class BookList extends Component {
     let allBooksButton;
 
     if (bookColor) {
-      books = bookStore.getBooksByColor(bookColor);
+      books = bookStore.filterBooksByColor(bookColor);
       allBooksButton = (
         <Link to="/books">
           <button className="btn">All Books</button>
