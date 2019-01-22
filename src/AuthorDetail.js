@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import bookStore from "./stores/BookStore";
+import authorStore from "./stores/AuthorStore";
+
 // Components
 import BookTable from "./BookTable";
 import Loading from "./Loading";
@@ -39,6 +42,9 @@ class AuthorDetail extends Component {
   }
 
   render() {
+    const authorID = this.props.match.params.authorID;
+    const author = authorStore.getAuthorById(authorID);
+    const books = author.books.map(bookID => bookStore.getBookById(bookID));
     if (this.state.loading) {
       return <Loading />;
     } else {
@@ -53,7 +59,7 @@ class AuthorDetail extends Component {
               alt={author.first_name + " " + author.last_name}
             />
           </div>
-          <BookTable books={author.books} />
+          <BookTable books={books} />
         </div>
       );
     }
